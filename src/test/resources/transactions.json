@@ -1,0 +1,41 @@
+[
+    {
+        "transactionId": "682654",
+        "operationId": "00000000682654",
+        "accountingDate": "2019-02-28",
+        "valueDate": "2019-03-01",
+        "type": {
+            "enumeration": "GBS_TRANSACTION_TYPE",
+            "value": "GBS_ACCOUNT_TRANSACTION_TYPE_0050"
+        },
+        "amount": -57.20,
+        "currency": "EUR",
+        "description": "PD VISA CORPORATE 01"
+    },
+    {
+        "transactionId": "1329140278001",
+        "operationId": "19000017094683",
+        "accountingDate": "2019-02-01",
+        "valueDate": "2019-02-01",
+        "type": {
+            "enumeration": "GBS_TRANSACTION_TYPE",
+            "value": "GBS_ACCOUNT_TRANSACTION_TYPE_0034"
+        },
+        "amount": 89.00,
+        "currency": "EUR",
+        "description": "GC LUCA TERRIBILE        DA 03268.22300         DATA ORDINE 01022019 COPERTURA SPESE"
+    },
+    {
+        "transactionId": "398894",
+        "operationId": "00000000398894",
+        "accountingDate": "2019-01-31",
+        "valueDate": "2019-02-01",
+        "type": {
+            "enumeration": "GBS_TRANSACTION_TYPE",
+            "value": "GBS_ACCOUNT_TRANSACTION_TYPE_0050"
+        },
+        "amount": -95.73,
+        "currency": "EUR",
+        "description": "PD VISA CORPORATE 12"
+    }
+]
