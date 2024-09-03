@@ -1,6 +1,7 @@
 package com.reply.pay.bridgeFabrick.demo.payload;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import jakarta.validation.Valid;
@@ -31,7 +32,9 @@ public class CreateMoneyTransfer {
     private BigDecimal amount;
     @NotNull(message = "currency required")
     private String currency;
+    @JsonProperty("isUrgent")
     private boolean isUrgent;
+    @JsonProperty("isInstant")
     private boolean isInstant;
     private String feeType;
     private String feeAccountId;
@@ -109,6 +112,7 @@ public class CreateMoneyTransfer {
     private static class TaxRelief {
         private String taxReliefId;
         @NotNull(message = "taxRelief.isCondoUpgrade required")
+        @JsonProperty("isCondoUpgrade")
         private boolean isCondoUpgrade;
         @NotNull(message = "taxRelief.creditorFiscalCode required")
         private String creditorFiscalCode;
@@ -118,6 +122,8 @@ public class CreateMoneyTransfer {
         private NaturalPersonBeneficiary naturalPersonBeneficiary;
         @NotNull(message = "taxRelief.beneficiaryType.legalPersonBeneficiary required")
         private LegalPersonBeneficiary legalPersonBeneficiary;
+
+
     }
 
     @SneakyThrows
