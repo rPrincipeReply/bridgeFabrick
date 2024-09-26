@@ -76,13 +76,27 @@ public class MainControllerMockMvcTest {
         final MvcResult result = mockMvc.perform(get(url))
                 .andExpect(status().is4xxClientError())
                 .andReturn();
+
         log.info("### Stop Testing Endpoint: {} | Result: {}", url, result.getResponse().getContentAsString());
 
 
     }
 
     @Test
-    public void whenGetTransactionsAccOkAndTimeFrame_thenOk() throws Exception {
+    public void whenGetTransactionsAccOkAndTimeFrameKo_thenError() throws Exception {
+        final String url = "/bankAccount/" + ACCOUNT_ID_OK + "/transactions?fromAccountingDate=BadFirstDate&toAccountingDate=2019-08-27";
+
+        log.info("### Testing Endpoint: " + url);
+
+        final MvcResult result = mockMvc.perform(get(url))
+                .andExpect(status().is4xxClientError())
+                .andReturn();
+
+        log.info("### Stop Testing Endpoint: {} | Result: {}", url, result.getResponse().getContentAsString());
+    }
+
+    @Test
+    public void whenGetTransactionsAccOkAndTimeFrameOk_thenOk() throws Exception {
         final String url = "/bankAccount/" + ACCOUNT_ID_OK + "/transactions?fromAccountingDate=2019-01-01&toAccountingDate=2019-08-27";
 
         log.info("### Testing Endpoint: " + url);

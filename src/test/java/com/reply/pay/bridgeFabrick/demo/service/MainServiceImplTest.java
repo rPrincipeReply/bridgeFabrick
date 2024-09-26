@@ -18,11 +18,10 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.MediaType;
 import org.springframework.http.RequestEntity;
-import org.springframework.http.RequestEntity.BodyBuilder;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;
 
-import java.time.format.DateTimeParseException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Optional;
 
@@ -35,8 +34,6 @@ class MainServiceImplTest {
     @Mock
     private RestTemplate restTemplateFabrick;
 
-    @Mock
-    private BodyBuilder bodyBuilder;
 
     @Test
     public void test_givenAccountId_whenGettingBalance_thenBalanceObjReturned() {
@@ -94,39 +91,12 @@ class MainServiceImplTest {
         final ArrayList<Transaction> actualTransactions =
                 mainService.getTransactions(
                         accountId,
-                        "2019-01-29",
-                        "2019-02-28");
+                        LocalDate.of(2019, 1,29),
+                        LocalDate.of(2019, 2,28));
 
         Assertions.assertEquals(expectedTransactions, actualTransactions);
     }
 
-    @Test
-    public void test_givenAccountIdAndNotValidFirstDate_whenGettingTransactions_thenDateTimeParseException() {
-
-        final String accountId = "14537780";
-
-        Assertions.assertThrows(
-                DateTimeParseException.class,
-                () -> mainService.getTransactions(
-                        accountId,
-                        "BadFirstDate",
-                        "2019-02-28"));
-
-    }
-
-    @Test
-    public void test_givenAccountIdAndNotValidSecondDate_whenGettingTransactions_thenDateTimeParseException() {
-
-        final String accountId = "14537780";
-
-        Assertions.assertThrows(
-                DateTimeParseException.class,
-                () -> mainService.getTransactions(
-                        accountId,
-                        "2019-01-29",
-                        "BadSecondDate"));
-
-    }
 
     @Test
     public void test_givenAccountIdAndNotValidTimeframe_whenGettingTransactions_thenIllegalArgumentException() {
@@ -137,8 +107,8 @@ class MainServiceImplTest {
                 IllegalArgumentException.class,
                 () -> mainService.getTransactions(
                         accountId,
-                        "2019-03-29",
-                        "2019-02-28"));
+                        LocalDate.of(2999, 2,28),
+                        LocalDate.of(2019, 2,28)));
 
     }
 

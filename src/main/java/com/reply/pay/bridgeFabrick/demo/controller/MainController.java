@@ -16,6 +16,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 @Log4j2
@@ -39,7 +40,7 @@ public class MainController {
     }
 
     @GetMapping("/{accountId}/balance")
-    public ResponseEntity<Balance> balance(@PathVariable String accountId) {
+    public ResponseEntity<Balance> balance(@PathVariable final String accountId) {
         log.info("UpStream Request [GET][balance] accountId: {}", accountId);
 
         final Balance body = mainService.getBalance(accountId);
@@ -52,9 +53,9 @@ public class MainController {
     }
 
     @GetMapping("/{accountId}/transactions")
-    public ResponseEntity<ArrayList<Transaction>> transactions(@PathVariable String accountId,
-                                                               @RequestParam String fromAccountingDate,
-                                                               @RequestParam String toAccountingDate) {
+    public ResponseEntity<ArrayList<Transaction>> transactions(@PathVariable final String accountId,
+                                                               @RequestParam final LocalDate fromAccountingDate,
+                                                               @RequestParam final LocalDate toAccountingDate) {
         log.info("UpStream Request [GET][transactions] accountId: {} | from: {} | to: {} ",
                 accountId,
                 fromAccountingDate,
@@ -78,7 +79,7 @@ public class MainController {
             consumes = "application/json",
             produces = "application/json")
     public ResponseEntity<?> moneyTransfer(@PathVariable String accountId,
-                                           @RequestBody @Valid CreateMoneyTransfer createMoneyTransferPayload) {
+                                           @RequestBody @Valid final CreateMoneyTransfer createMoneyTransferPayload) {
         log.info("UpStream Request [POST][moneyTransfer] accountId: {} | payload: {}",
                 accountId,
                 createMoneyTransferPayload);

@@ -6,14 +6,15 @@ import com.reply.pay.bridgeFabrick.demo.payload.MoneyTransfer;
 import com.reply.pay.bridgeFabrick.demo.payload.Transaction;
 import jakarta.validation.Valid;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 public interface MainService {
-    Balance getBalance(String accountId);
+    Balance getBalance(final String accountId);
 
-    ArrayList<Transaction> getTransactions(String accountId,
-                                           String fromAccountingDate,
-                                           String toAccountingDate);
+    ArrayList<Transaction> getTransactions(final String accountId,
+                                           final LocalDate fromAccountingDate,
+                                           final LocalDate toAccountingDate);
 
-    MoneyTransfer performMoneyTransfer(String accountId, @Valid CreateMoneyTransfer createMoneyTransferPayload);
+    MoneyTransfer performMoneyTransfer(final String accountId, @Valid final CreateMoneyTransfer createMoneyTransferPayload);
 }

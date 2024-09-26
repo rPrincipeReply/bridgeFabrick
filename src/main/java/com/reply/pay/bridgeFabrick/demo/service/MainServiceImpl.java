@@ -31,7 +31,7 @@ public class MainServiceImpl implements MainService {
     private final RestTemplate restTemplateFabrick;
 
     @Override
-    public Balance getBalance(String accountId) {
+    public Balance getBalance(final String accountId) {
         log.info("Entering Balance Service for account ID {}", accountId);
 
         if (!GenericValidator.isLong(accountId)) {
@@ -57,9 +57,9 @@ public class MainServiceImpl implements MainService {
     }
 
     @Override
-    public ArrayList<Transaction> getTransactions(String accountId,
-                                                  String fromAccountingDate,
-                                                  String toAccountingDate) {
+    public ArrayList<Transaction> getTransactions(final String accountId,
+                                                  final LocalDate fromAccountingDate,
+                                                  final LocalDate toAccountingDate) {
 
         log.info("Entering Transactions Service for account ID {}", accountId);
 
@@ -67,10 +67,7 @@ public class MainServiceImpl implements MainService {
             throw new IllegalArgumentException("AccountId is not valid");
         }
 
-        final LocalDate fromDate = LocalDate.parse(fromAccountingDate);
-        final LocalDate toDate = LocalDate.parse(toAccountingDate);
-
-        if (fromDate.isAfter(toDate)) {
+        if (fromAccountingDate.isAfter(toAccountingDate)) {
             throw new IllegalArgumentException("fromAccountingDate greater than toAccountingDate");
         }
 
@@ -95,7 +92,7 @@ public class MainServiceImpl implements MainService {
     }
 
     @Override
-    public MoneyTransfer performMoneyTransfer(String accountId, @Valid CreateMoneyTransfer createMoneyTransferPayload) {
+    public MoneyTransfer performMoneyTransfer(final String accountId, @Valid final CreateMoneyTransfer createMoneyTransferPayload) {
         log.info("Entering Money Transfer Service for account ID {}", accountId);
 
         if (!GenericValidator.isLong(accountId)) {
