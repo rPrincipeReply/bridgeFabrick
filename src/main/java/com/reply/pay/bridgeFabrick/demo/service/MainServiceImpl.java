@@ -30,7 +30,6 @@ public class MainServiceImpl implements MainService {
 
     private final RestTemplate restTemplateFabrick;
 
-    @Override
     public Balance getBalance(final String accountId) {
         log.info("Entering Balance Service for account ID {}", accountId);
 
@@ -56,7 +55,6 @@ public class MainServiceImpl implements MainService {
         return Objects.requireNonNull(responseEntity.getBody()).getPayload();
     }
 
-    @Override
     public ArrayList<Transaction> getTransactions(final String accountId,
                                                   final LocalDate fromAccountingDate,
                                                   final LocalDate toAccountingDate) {
@@ -91,7 +89,6 @@ public class MainServiceImpl implements MainService {
         return Objects.requireNonNull(responseEntity.getBody()).getPayload().getList();
     }
 
-    @Override
     public MoneyTransfer performMoneyTransfer(final String accountId, @Valid final CreateMoneyTransfer createMoneyTransferPayload) {
         log.info("Entering Money Transfer Service for account ID {}", accountId);
 
